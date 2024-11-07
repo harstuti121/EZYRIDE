@@ -13,6 +13,7 @@ import ContactEzy from "./Pages/Contact";
 import OurTeam from "./Pages/OurTeam";
 import AddVehicle from "./components/AddVehicle";
 import Safety from "./Pages/Safety";
+import BookModel from "./components/BookModel";
 import { ViewProvider } from "./Context_api/contextApi";
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route path="/OurTeam" element={<OurTeam />} />
         <Route path="/Safety" element={<Safety></Safety>} />
         <Route path="/AddVehicle" element={<AddVehicle addVehicle={addVehicle} />} />
+        <Route path="/bookModel" element={<BookModel/>} />
         {/* <Route path="/ContactEzy" element={<ContactEzy />} /> */}
       </Routes>
       </ViewProvider>

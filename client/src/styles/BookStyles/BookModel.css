@@ -1,0 +1,214 @@
+/* Modal Background */
+.booking-modal {
+  margin-bottom: 100px;
+  margin-left: 50%;
+  margin-top: 30%;
+  padding: 2%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal Content with White Background */
+.booking-modal__content {
+  background-color: #ffffff; /* Background color set to white */
+  border-radius: 10px;
+  max-width: 600px;
+  width: 90%;
+  padding: 30px 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+}
+
+/* Title with #721c24 Color */
+.booking-modal h2,
+.booking-modal h3 {
+  color: #721c24; /* Title color set to #721c24 */
+  margin-bottom: 20px;
+  font-size: 22px;
+  text-align: center;
+}
+
+.book-title-1 {
+  color: #721c24; /* Color set to #721c24 */
+}
+
+/* Image */
+.booking-image {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+/* Description */
+.booking-description {
+  font-size: 16px;
+  color: #721c24; /* Keeping description color subtle */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form Styles */
+.booking-form {
+  margin: 10%;
+  display: flex;
+  flex-direction: column;
+}
+
+.megh-1 {
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+/* Label with Updated Color */
+.megh-1 label {
+  font-size: 14px;
+  color: #721c24; /* Label color set to #721c24 */
+  display: block;
+  margin-bottom: 5px;
+}
+
+.megh-1 input[type="text"],
+.megh-1 input[type="tel"],
+.megh-1 input[type="date"],
+.megh-1 input[type="time"],
+.megh-1 select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
+  margin-top: 5px;
+}
+
+.megh-1 input:focus,
+.megh-1 select:focus {
+  border-color: #721c24; /* Input border color changed to match theme */
+}
+
+/* Submit Button with Updated Background Color */
+.submit-button {
+  background-color: #721c24; /* Button background color changed */
+  color: #ffffff;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.submit-button:hover {
+  background-color: #5a1018; /* Darker shade on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .booking-modal__content {
+    padding: 20px;
+  }
+
+  .booking-modal h2 {
+    font-size: 20px;
+  }
+
+  .booking-modal h3 {
+    font-size: 18px;
+  }
+
+  .booking-description {
+    font-size: 15px;
+    margin-bottom: 15px;
+  }
+
+  .megh-1 input[type="text"],
+  .megh-1 input[type="tel"],
+  .megh-1 input[type="date"],
+  .megh-1 input[type="time"],
+  .megh-1 select {
+    padding: 8px;
+  }
+
+  .submit-button {
+    padding: 10px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-modal__content {
+    padding: 15px;
+  }
+
+  .booking-modal h2 {
+    font-size: 18px;
+  }
+
+  .booking-modal h3 {
+    font-size: 16px;
+  }
+
+  .booking-description {
+    font-size: 14px;
+  }
+
+  .megh-1 input[type="text"],
+  .megh-1 input[type="tel"],
+  .megh-1 input[type="date"],
+  .megh-1 input[type="time"],
+  .megh-1 select {
+    padding: 7px;
+  }
+
+  .submit-button {
+    padding: 8px;
+    font-size: 14px;
+  }
+}
+
+
+
+.payment-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* Adds space between buttons */
+}
+
+.megh-pay{
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  width: 48%; /* Makes each button take up half the space */
+}
+
+.pay-later-button {
+  background-color: #f44336; /* Red color for Pay Later button */
+}
+
+.submit-button:hover, .pay-later-button:hover {
+  opacity: 0.8;
+}

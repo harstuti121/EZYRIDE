@@ -194,7 +194,39 @@ app.get('/vehicles', async (req, res) => {
 });
 
 
-//to get the allot driver 
+//to get the alloted driver 
+app.get('/book/driver',verifyToken, async (req, res) => {
+  const insuranceId = req.query.insuranceId;
+
+  // Check if insuranceId is provided
+  if (!insuranceId) {
+    return res.status(400).json({ error: 'Insurance ID is required' });
+  }
+
+  try {
+    // Query to find drivers whose owner has the specified vehicle insurance
+    const [rows] = await pool.query(
+      `SELECT driver.d_no, vehicle.v_insurance
+      FROM driver
+      JOIN vehicle ON driver.o_no = vehicle.o_no
+      WHERE vehicle.v_insurance = ?
+       `, 
+      [insuranceId]
+    );
+
+    const Data = {
+      customerNumber: req.user.c_no, // Access customer number from the decoded token
+      detail: rows // Include the drivers information fetched from the database
+    };
+
+    // Send the result as JSON
+    res.json(Data);
+
+  } catch (error) {
+    console.error('Error fetching drivers:', error.message);
+    res.status(500).json({ error: 'An error occurred while fetching drivers' });
+  }
+});
 
 
 

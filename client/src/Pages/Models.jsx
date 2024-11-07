@@ -1,27 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CarImg1 from "../images/cars-big/audi-box.png";
-import CarImg2 from "../images/cars-big/golf6-box.png";
-import CarImg3 from "../images/cars-big/toyota-box.png";
-import CarImg4 from "../images/cars-big/bmw-box.png";
-import CarImg5 from "../images/cars-big/benz-box.png";
-import BikeImg1 from "../images/bike/bike1.jpeg"; 
-import ScootyImg1 from "../images/Scooty/scooty1.jpeg"; 
-import "../styles/Vehicles/vehicles.css";
 import HeroPages from '../components/HeroPages';
-import AddVehicle from '../components/AddVehicle'; // Import AddVehicle component
-const isRegistered = true;
+import AddVehicle from '../components/AddVehicle';
+import "../styles/Vehicles/vehicles.css";
+import { useViewContext } from '../Context_api/contextApi';
+
 const VehiclCardComp = ({ imgSrc, price, title, description }) => {
+  const isRegistered = true;
   const navigate = useNavigate();
   const handleBookNowClick = () => {
     if (isRegistered) {
-      // Redirect to BookModel page
-      navigate("/BookModel");
+      navigate('/bookModel', {
+        state: {
+          imgSrc,
+          price,
+          title,
+          description,
+        },
+      });
     } else {
-      // Redirect to CustomerRegister page
-      navigate("/RegCustomer");
+      navigate("/custRegister");
     }
   };
+
   return (
     <article className="popular__card swiper-slide">
       <img className="popular__img" src={imgSrc} alt={title} />
@@ -32,7 +33,7 @@ const VehiclCardComp = ({ imgSrc, price, title, description }) => {
         <h1 className="popular__title">{title}</h1>
         <p className="popular__description">{description}</p>
         <div className="popular__buttons">
-        <button className="popular__button book" onClick={handleBookNowClick}>
+          <button className="popular__button book" onClick={handleBookNowClick}>
             Book Now
           </button>
           <button className="popular__button more">More</button>
@@ -42,42 +43,49 @@ const VehiclCardComp = ({ imgSrc, price, title, description }) => {
   );
 };
 
+
+
 const Models = () => {
+  const { VehicleData } = useViewContext(); // Access context values
   const [category, setCategory] = useState('All');
+  const [items, setItems] = useState([]);
   const navigate = useNavigate();
 
-  const [items, setItems] = useState([
-    { imgSrc: CarImg1, price: '66,356', title: 'Indrapuri, Bhopal', description: 'Audi Car', type: 'Car' },
-    { imgSrc: CarImg2, price: '35,159', title: 'MP Nagar, Bhopal', description: 'Golf6 Car', type: 'Car' },
-    { imgSrc: CarImg3, price: '75,043', title: 'Arera Hills, Bhopal', description: 'Toyota Car', type: 'Car' },
-    { imgSrc: CarImg4, price: '62,024', title: 'Kolar , Bhopal', description: 'BMW Car', type: 'Car' },
-    { imgSrc: CarImg5, price: '47,043', title: 'Awadh Nagar, Bhopal', description: 'Benz Car', type: 'Car' },
-    { imgSrc: BikeImg1, price: '15,000', title: 'TT Nagar, Bhopal', description: 'Bike', type: 'Bike' },
-    { imgSrc: ScootyImg1, price: '10,000', title: 'Piplani, Bhopal', description: 'Scooty', type: 'Scooty' }
-  ]);
+  // // Fetch data from backend
+  // useEffect(() => {
+  //   const fetchVehicles = async () => {
+  //     try {
+  //       const response = await axios.get('/api/vehicles');
+  //       setItems(response.data); // Assumes API returns an array of vehicle objects
+  //     } catch (error) {
+  //       console.error("Error fetching vehicles:", error);
+  //     }
+  //   };
+  //   fetchVehicles();
+  // }, []);
 
-  const handleAddVehicle = (newVehicle) => {
-    setItems((prevItems) => [...prevItems, newVehicle]);
-  };
+  // const handleAddVehicle = (newVehicle) => {
+  //   setItems((prevItems) => [...prevItems, newVehicle]);
+  // };
 
-  const handleCategoryChange = (newCategory) => {
-    if (newCategory === 'Add New Vehicle') {
-      navigate('/AddVehicle');
-    } else {
-      setCategory(newCategory);
-    }
-  };
+  // const handleCategoryChange = (newCategory) => {
+  //   if (newCategory === 'Add New Vehicle') {
+  //     navigate('/AddVehicle');
+  //   } else {
+  //     setCategory(newCategory);
+  //   }
+  // };
 
-  const filteredItems = category === 'All'
-    ? items
-    : items.filter(item => item.type === category);
+  // const filteredItems = category === 'All'
+  //   ? items
+  //   : items.filter(item => item.type === category);
 
   return (
     <section className="section" id="popular">
       <HeroPages name="Vehicle Models" />
       <div className="container">
         {/* Category Buttons */}
-        <div className="category-buttons">
+        {/* <div className="category-buttons">
           <button
             onClick={() => handleCategoryChange('All')}
             className={category === 'All' ? 'active' : ''}
@@ -108,12 +116,12 @@ const Models = () => {
           >
             Add New Vehicle
           </button>
-        </div>
+        </div> */}
 
         {/* Display filtered vehicles */}
         <div className="popular__container swiper">
           <div className="swiper-wrapper">
-            {filteredItems.map((property, index) => (
+            {VehicleData.map((property, index) => (
               <VehiclCardComp
                 key={index}
                 imgSrc={property.imgSrc}
@@ -125,16 +133,18 @@ const Models = () => {
           </div>
         </div>
 
-        {/* Add New Vehicle Form */}
+        {/* Add New Vehicle Form
         {category === 'Add New Vehicle' && (
           <AddVehicle addVehicle={handleAddVehicle} />
-        )}
+        )} */}
       </div>
     </section>
   );
 };
 
 export default Models;
+
+
 
 
 
