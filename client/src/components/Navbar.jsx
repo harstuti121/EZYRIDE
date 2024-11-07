@@ -3,20 +3,20 @@ import Logo from "../images/logo/logo_ezy.png";
 import { useEffect, useState } from "react";
 import { TbGridDots } from "react-icons/tb";
 import { FaTimes } from "react-icons/fa";
-import UserImage from "../images/card-image.png"; // Add the path to your user image
+import UserImage from "../images/card-image.png"; // Path to user image
+import { useViewContext } from "../Context_api/contextApi";
 
 function Navbar() {
   const [nav, setNav] = useState(false); // Toggle mobile nav
   const [dropdownOpen, setDropdownOpen] = useState(false); // Toggle dropdown for registration
-  const [userName, setUserName] = useState('');
-
+  const {userName}=useViewContext();
   useEffect(() => {
     // Retrieve user name from local storage
-    const storedName = localStorage.getItem('userName');
-    if (storedName) {
-      setUserName(storedName);
-    }
-  }, []);
+    // const storedName = localStorage.getItem('userName');
+    // if (storedName) {
+    //   setUserName(storedName);
+    // }
+  }, []);
 
   const toggleNav = () => {
     setNav(!nav); // Toggle mobile menu
@@ -37,27 +37,30 @@ function Navbar() {
           <ul className="mobile-navbar__links">
             <li><Link onClick={toggleNav} to="/">Home</Link></li>
             <li><Link onClick={toggleNav} to="/about">About</Link></li>
-            <li><Link onClick={toggleNav} to="/models">Models</Link></li>
-            <li><Link onClick={toggleNav} to="/testimonials">Testimonials</Link></li>
-            <li><Link onClick={toggleNav} to="/team">Our Team</Link></li>
-            <li><Link onClick={toggleNav} to="/contact">Contact</Link></li>
+            <li><Link onClick={toggleNav} to="/models">Vehicle Models</Link></li>
+            <li><Link onClick={toggleNav} to="/Safety">Safety</Link></li>
+            <li><Link onClick={toggleNav} to="/OurTeam">Our Team</Link></li>
+            <li><Link onClick={toggleNav} to="/ContactEzy">Contact</Link></li>
           </ul>
 
-          {/* Sign In Button for Mobile */}
+          {/* User Section for Mobile */}
           <div className="mobile-signin">
             {userName ? (
-              <img
-                src={UserImage}
-                alt="user-icon"
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                  cursor: "pointer"
-                }}
-                title={`Hello, ${userName}`}
-              />
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <img
+                  src={UserImage}
+                  alt="user-icon"
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    cursor: "pointer"
+                  }}
+                  title={`Hello, ${userName}`}
+                />
+                <span style={{ fontWeight: "bold", color: "#750E21" }}>{userName}</span>
+              </div>
             ) : (
               <button
                 className="mobile-navbar__signin"
@@ -77,7 +80,7 @@ function Navbar() {
             )}
 
             {/* Dropdown menu for mobile registration */}
-            {dropdownOpen && (
+            {dropdownOpen && !userName && (
               <div
                 className="dropdown-menu"
                 style={{
@@ -126,11 +129,6 @@ function Navbar() {
               </div>
             )}
           </div>
-
-          <div className="navbar__buttons">
-            <li><Link onClick={toggleNav} to="/main_customer">Register as Customer</Link></li>
-            <li><Link onClick={toggleNav} to="/main_owner">Register as Owner</Link></li>
-          </div>
         </div>
 
         {/* Desktop Navbar */}
@@ -144,25 +142,28 @@ function Navbar() {
             <li><Link className="home-link" to="/">Home</Link></li>
             <li><Link className="about-link" to="/about">About</Link></li>
             <li><Link className="models-link" to="/models">Vehicle Models</Link></li>
-            <li><Link className="testi-link" to="/testimonials">Testimonials</Link></li>
-            <li><Link className="team-link" to="/team">Our Team</Link></li>
-            <li><Link className="contact-link" to="/contact">Contact</Link></li>
+            <li><Link className="safety-link" to="/Safety">Safety</Link></li>
+            <li><Link className="team-link" to="/OurTeam">Our Team</Link></li>
+            <li><Link className="contact-link" to="/contactEzy">Contact</Link></li>
           </ul>
 
           <div className="navbar__buttons">
             {userName ? (
-              <img
-                src={UserImage}
-                alt="user-icon"
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                  cursor: "pointer"
-                }}
-                title={`Hello, ${userName}`}
-              />
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <img
+                  src={UserImage}
+                  alt="user-icon"
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    cursor: "pointer"
+                  }}
+                  title={`Hello, ${userName}`}
+                />
+                <span style={{ fontWeight: "bold", color: "#750E21" }}>{userName}</span>
+              </div>
             ) : (
               <div className="navbar__register-dropdown" style={{ position: "relative", display: "inline-block" }}>
                 <button

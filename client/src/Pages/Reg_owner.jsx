@@ -422,14 +422,67 @@ const RegOwner = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
-  if (name === 'o_no') {
-    // Convert contactNo to BigInt
-    setFormData({ ...formData, [name]: bigInt(value) });
-  } else {
-    setFormData({ ...formData, [name]: value });
-  }
+  
+    // Logic for Aadhaar number input
+    if (name === 'o_aadhar') {
+      const regex = /^\d{0,12}$/; // Allow only numbers, up to 16 digits
+      if (regex.test(value)) {
+        setFormData({ ...formData, [name]: value });
+  
+        // Set error based on length
+        if (value.length === 12) {
+          setErrors({ ...errors, [name]: '' });
+        } else {
+          setErrors({ ...errors, [name]: 'Aadhaar number must be 12 digits long.' });
+        }
+      } else {
+        setErrors({ ...errors, [name]: 'Only numeric values are allowed.' });
+      }
+    }
+  
+    // Logic for Pin input
+    else if (name === 'o_pin') {
+      const regex = /^\d{0,6}$/; // Allow only numbers, up to 6 digits
+      if (regex.test(value)) {
+        setFormData({ ...formData, [name]: value });
+  
+        // Set error based on length
+        if (value.length === 6) {
+          setErrors({ ...errors, [name]: '' });
+        } else {
+          setErrors({ ...errors, [name]: 'Pin must be exactly 6 digits long.' });
+        }
+      } else {
+        setErrors({ ...errors, [name]: 'Only numeric values are allowed.' });
+      }
+    }
+  
+    // Logic for contact number input
+    else if (name === 'o_no') {
+      // Ensure the value is numeric
+      const regex = /^\d{0,10}$/;
+      if (regex.test(value)) {
+        // Convert contactNo to BigInt (if you want to store it as BigInt)
+        setFormData({ ...formData, [name]: bigInt(value) });
+        setErrors({ ...errors, [name]: '' }); // Reset error if valid
+        // Set error based on length
+        if (value.length === 6) {
+          setErrors({ ...errors, [name]: '' });
+        } else {
+          setErrors({ ...errors, [name]: 'Must be exactly 10 digits long.' });
+        }
+      } else {
+        setErrors({ ...errors, [name]: 'Only numeric values are allowed.' });
+      }
+    } 
+  
+    // For other inputs
+    else {
+      setFormData({ ...formData, [name]: value });
+      setErrors({ ...errors, [name]: '' }); // Reset error for other fields
+    }
   };
+  
 
   const validateForm = () => {
     let tempErrors = {};
@@ -450,12 +503,17 @@ const RegOwner = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async(e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent the default form submission
+
+    // Validation logic
+    let isValid = true;
+    const newErrors = {};
+  
     const validationErrors = validateForm();
     if (validationErrors) {
       try {
         console.log('Form Data:', formData);
-        const response = await axios.post('http://localhost:3000/owner_register', formData, {
+        const response = await axios.post('http://localhost:3001/owner_register', formData, {
         headers: { 'Content-Type': 'application/json' }
       });
         // setMessage(response.data.message);
@@ -473,6 +531,14 @@ const RegOwner = () => {
     } else {
       console.log(formData)
       setErrors(validationErrors);
+    }
+
+    setErrors(newErrors);
+    // If the form is valid, proceed with the registration logic
+    if (isValid) {
+      // Submit the form data
+      console.log("Form submitted successfully:", formData);
+      // Add your form submission logic here (e.g., API call)
     }
   };
 
@@ -522,24 +588,26 @@ const RegOwner = () => {
           </h2>
           <form onSubmit={handleSubmit}>
             {/* Form Fields */}
-            <div style={{ marginBottom: '16px' }}>
-              <input
-                type="text"
-                name="o_no"
-                placeholder="Contact No."
-                value={formData.o_no}
-                onChange={handleInputChange}
-                style={{
-                  width: '100%',
-                  padding: '12px',
-                  border: '1px solid #ccc',
-                  borderRadius: '5px',
-                  outline: 'none',
-                  marginBottom: '10px',
-                }}
-              />
-              {errors.o_no && <p style={{ color: 'red' }}>{errors.o_no}</p>}
-            </div>
+            {/* Contact No. */}
+              <div style={{ marginBottom: '16px' }}>
+                <input
+                  type="text"
+                  name="o_no"
+                  placeholder="Contact No."
+                  value={formData.o_no}
+                  onChange={handleInputChange}
+                  style={{
+                    width: '100%',
+                    padding: '12px',
+                    border: '1px solid #ccc',
+                    borderRadius: '5px',
+                    outline: 'none',
+                    marginBottom: '10px',
+                  }}
+                  required
+                />
+                {errors.o_no && <p style={{ color: 'red' }}>{errors.o_no}</p>}
+              </div>
 
             <div style={{ marginBottom: '16px' }}>
               <input
@@ -556,6 +624,7 @@ const RegOwner = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
               {errors.o_name && <p style={{ color: 'red' }}>{errors.o_name}</p>}
             </div>
@@ -576,6 +645,7 @@ const RegOwner = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
               {errors.o_aadhar && <p style={{ color: 'red' }}>{errors.o_aadhar}</p>}
             </div>
@@ -595,6 +665,7 @@ const RegOwner = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
               {errors.o_DOB && <p style={{ color: 'red' }}>{errors.o_DOB}</p>}
             </div>
@@ -639,6 +710,7 @@ const RegOwner = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
               {errors.o_state && <p style={{ color: 'red' }}>{errors.o_state}</p>}
             </div>
@@ -658,6 +730,7 @@ const RegOwner = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
               {errors.o_city && <p style={{ color: 'red' }}>{errors.o_city}</p>}
             </div>
@@ -677,6 +750,7 @@ const RegOwner = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
               {errors.o_street && <p style={{ color: 'red' }}>{errors.o_street}</p>}
             </div>
@@ -696,6 +770,7 @@ const RegOwner = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
               {errors.o_pin && <p style={{ color: 'red' }}>{errors.o_pin}</p>}
             </div>
@@ -716,6 +791,7 @@ const RegOwner = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
               {errors.o_email && <p style={{ color: 'red' }}>{errors.o_email}</p>}
             </div>
@@ -737,6 +813,7 @@ const RegOwner = () => {
                   outline: 'none',
                   marginBottom: '10px',
                 }}
+                required
               />
               <span
                 onClick={() => setPasswordVisible(!passwordVisible)}
@@ -752,7 +829,7 @@ const RegOwner = () => {
               {errors.o_password && <p style={{ color: 'red' }}>{errors.o_password}</p>}
             </div>
 
-            {/* Confirm Password
+            Confirm Password
             <div style={{ marginBottom: '16px', position: 'relative' }}>
               <input
                 type={confirmPasswordVisible ? 'text' : 'password'}
@@ -783,23 +860,23 @@ const RegOwner = () => {
               {errors.confirmPassword && (
                 <p style={{ color: 'red' }}>{errors.confirmPassword}</p>
               )} 
-            </div>*/}
+            </div>
 
             <button
-              type="submit"
-              style={{
-                padding: '12px 20px',
-                backgroundColor: '#750E21',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer',
-                fontSize: '16px',
-                fontWeight: 'bold',
-              }}
-            >
-              Register
-            </button>
+            type="submit"
+            style={{
+              padding: '12px 20px',
+              backgroundColor: '#750E21',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '16px',
+              fontWeight: 'bold',
+            }}
+          >
+            Register
+          </button>
 
             <div style={{ marginTop: '20px'}}>
               <p>Already a customer?</p>

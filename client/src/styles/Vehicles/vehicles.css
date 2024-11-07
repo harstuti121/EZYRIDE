@@ -1,0 +1,282 @@
+.section {
+    padding: 4.5rem 0 2rem;
+  }
+  
+  .section__title {
+    font-size: var(--h2-font-size);
+    margin-bottom: 1rem;
+  }
+  
+  .section__title span {
+    color: var(--second-color);
+  }
+  
+  .section__subtitle {
+    display: block;
+    font-size: var(--small-font-size);
+    color: var(--second-color);
+  }
+  
+  .main {
+    overflow: hidden; /* For the animations ScrollReveal*/
+  }
+
+.popular__container {
+    margin-top: 100px;
+    padding: 1rem 0 5rem;
+  }
+  
+  .popular__card {
+    width: 290px;
+    background-color: var(--container-color);
+    padding: 0.5rem 0.5rem 1.5rem;
+    border-radius: 1rem;
+    margin: 0 auto;
+    transition: 0.4s;
+  }
+  
+  .popular__img {
+    width: 285px;
+    height: 200px;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .popular__data {
+    padding: 0 1rem 0 0.5rem;
+  }
+  
+  .popular__price {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #750E21; /* Orange color for the price */
+    margin-bottom: 0.5rem;
+  }
+  
+  .popular__price span {
+    color: var(--second-color);
+  }
+  
+  .popular__title {
+    font-size: 1.55rem;
+    font-weight: bold;
+    color: #2f2e41; /* Dark blueish color for the title */
+    margin-bottom: 0.5rem;
+  }
+  
+  .popular__description {
+    font-size: 1rem;
+    color: #9096b2; /* Light grayish blue for description text */
+    line-height: 1.5;
+  }
+  
+  .popular__card:hover {
+    box-shadow: 0 12px 16px hsla(228, 66%, 45%, 0.1);
+  }
+
+  .popular__buttons {
+    justify-content: center;
+    display: flex;
+    gap: 1rem; /* Adds space between the buttons */
+    margin-top: 1rem;
+  }
+  
+  .popular__button {
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Book Now button styling */
+  .popular__button.book {
+    background-color: #750E21; /* Dark blue */
+    color: #fff;
+  }
+  
+  .popular__button.book:hover {
+    background-color: #000; /* Orange on hover */
+    transform: scale(1.05);
+  }
+  
+  /* More button styling */
+  .popular__button.more {
+    background-color: #fff;
+    color: #750E21;
+    border: 1px solid #750E21; /* Adds a border to the "More" button */
+  }
+  
+  .popular__button.more:hover {
+    background-color: #000; /* Orange on hover */
+    color: #fff; /* White text on hover */
+    border-color: #000;
+    transform: scale(1.05);
+  }
+  
+  /* Swiper class */
+  .swiper-wrapper {
+    display: flex;
+    gap: 20px; /* Adds space between the cards */
+    padding: 10px;
+    justify-content: space-between; /* Distributes cards with space between them */
+    flex-wrap: wrap; /* Wrap cards if needed on smaller screens */
+  }
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    content: '';
+  }
+  
+  .swiper-button-prev,
+  .swiper-button-next {
+    top: initial;
+    bottom: 0;
+    width: initial;
+    height: initial;
+    background-color: var(--container-color);
+    border: 2px solid var(--text-color-light);
+    padding: 6px;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    color: var(--first-color);
+  }
+  
+  .swiper-button-prev {
+    left: calc(50% - 3rem);
+  }
+  
+  .swiper-button-next {
+    right: calc(50% - 3rem);
+  }
+  
+  .add-property-form {
+    margin-top: 0.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-aligns all items horizontally */
+    justify-content: center; /* Ensures the form is centered vertically */
+    width: 100%; /* Full width of the container */
+    /* margin: 0 auto;  */
+  }
+
+  .add-titlee{
+    margin-top: 8%;
+    color: #750E21;
+    margin-bottom: 12px;
+    font-size: 25px;
+  }
+  
+  .megh-1 {
+    width: 50%; /* Sets the width of inputs to 50% */
+    border: 1px solid #ccc; /* Light grey border */
+    padding: 10px; /* Adds padding inside the input */
+    margin-bottom: 10px; /* Adds space between input fields */
+    border-radius: 4px; /* Rounded corners */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    font-size: 16px; /* Ensures a consistent font size */
+  }
+  
+  .megh-1:focus {
+    border-color: #007bff; /* Changes border color on focus */
+    outline: none; /* Removes default blue outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Adds a subtle glow effect on focus */
+  }
+  
+  .btn.button {
+    width: 50%; /* Button width is also 50% */
+    padding: 10px; /* Padding for the button */
+    text-align: center; /* Centers text within the button */
+    background-color: #007bff; /* Primary color for the button */
+    color: white; /* White text color */
+    border: none; /* Removes border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+  }
+  
+  .btn.button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+
+  .category-buttons {
+    margin-top: 100px;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+  }
+  
+  .category-buttons button {
+    font-size: 100px;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #750E21;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .category-buttons button.active {
+    background-color: #000;
+  }
+  
+  .category-buttons button:hover {
+    background-color: #000;
+  }
+
+  /* Tablet screens */
+@media (max-width: 768px) {
+  .add-titlee {
+    font-size: 22px;
+    margin-top: 18%;
+  }
+
+  .megh-1, .btn.button {
+    width: 80%; /* Increase width for better usability */
+  }
+
+  .category-buttons button {
+    padding: 0.8rem 2rem;
+    font-size: 0.9rem; /* Smaller font size */
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 480px) {
+  .add-titlee {
+    font-size: 20px;
+    margin-top: 30%;
+    text-align: center; /* Center title on smaller screens */
+  }
+
+  .megh-1, .btn.button {
+    width: 90%; /* Full width for better usability on mobile */
+  }
+
+  .category-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .category-buttons button {
+    width: 100%;
+    padding: 0.7rem 1.5rem;
+    font-size: 0.85rem;
+  }
+}
+  
+
+.error {
+  align-items: flex-start;
+  justify-self: start;
+  color: red;
+  font-size: 0.9em;
+  margin-top: -5px;
+  margin-bottom: 10px;
+}

@@ -6,7 +6,7 @@ function Footer() {
           <div className="footer-content">
             <ul className="footer-content__1">
               <li>
-                <span>CAR</span> Rental
+                <span>Ezy</span>Ride
               </li>
               <li>
                 We offers a big range of vehicles for all your driving needs. We
@@ -24,7 +24,7 @@ function Footer() {
                 carrental@gmail.com"
                 >
                   <i className="fa-solid fa-envelope"></i>
-                  &nbsp; carrental@gmail.com
+                  &nbsp; ezyride@gmail.com
                 </a>
               </li>
 
